@@ -79,5 +79,31 @@ namespace SortLibraryTest
             Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.MergeSort((int[])this._sortedOddLengthArray.Clone(), 0, this._sortedOddLengthArray.Length - 1)));
             Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.MergeSort((int[])this._unsortedOddLengthArray.Clone(), 0, this._unsortedOddLengthArray.Length - 1)));
         }
+
+        [TestMethod]
+        public void QuickSortTest()
+        {
+            var sorter = new ArraySort();
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._fullyUnsortedEvenLengthArray.Clone(), 0, this._fullyUnsortedEvenLengthArray.Length - 1)));
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._sortedEvenLengthArray.Clone(), 0, this._sortedEvenLengthArray.Length - 1)));
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._unsortedEvenLengthArray.Clone(), 0, this._unsortedEvenLengthArray.Length - 1)));
+
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._fullyUnsortedOddLengthArray.Clone(), 0, this._fullyUnsortedOddLengthArray.Length - 1)));
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._sortedOddLengthArray.Clone(), 0, this._sortedOddLengthArray.Length - 1)));
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.QuickSort((int[])this._unsortedOddLengthArray.Clone(), 0, this._unsortedOddLengthArray.Length - 1)));
+        }
+
+        [TestMethod]
+        public void RadixSortTest()
+        {
+            var sorter = new ArraySort();
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._fullyUnsortedEvenLengthArray.Clone())));
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._sortedEvenLengthArray.Clone())));
+            Assert.AreEqual("0, 1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._unsortedEvenLengthArray.Clone())));
+
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._fullyUnsortedOddLengthArray.Clone())));
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._sortedOddLengthArray.Clone())));
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7", string.Join(", ", sorter.RadixSort((int[])this._unsortedOddLengthArray.Clone())));
+        }
     }
 }

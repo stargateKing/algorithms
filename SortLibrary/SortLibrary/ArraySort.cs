@@ -181,5 +181,94 @@ namespace SortLibrary
 
             return data;
         }
+
+        public int[] QuickSort(int[] data, int leftIndex, int rightIndex)
+        {            
+            if (leftIndex < rightIndex)
+            {
+                int partitionIndex = this.partition(data, leftIndex, rightIndex);
+
+                QuickSort(data, leftIndex, partitionIndex - 1);
+                QuickSort(data, partitionIndex + 1, rightIndex);
+            }
+
+            return data;
+        }
+
+        private int partition(int[] data, int leftIndex, int rightIndex)
+        {
+            // Use last element as the pivot
+            int pivot = data[rightIndex];
+
+            int smallerIndex = leftIndex - 1;
+            for (int i = leftIndex; i < rightIndex; i++)
+            {
+                if (data[i] < pivot)
+                {
+                    ++smallerIndex;
+                    this.Swap(data, smallerIndex, i);
+                }
+            }
+            this.Swap(data, smallerIndex + 1, rightIndex);
+            return smallerIndex + 1;
+        }
+
+        public int[] RadixSort(int[] data)
+        {
+            int max = this.GetMaxItem(data);
+
+            for (int exponent = 1; max/exponent > 1; exponent = exponent * 10)
+            {
+                this.CountSort(data, exponent);
+            }
+            return data;
+        }
+
+        private int GetMaxItem(int[] data)
+        {
+            int max = -1;
+            for (int i = 0; i < data.Length; i++)
+            {
+                max = Math.Max(max, data[i]);
+            }
+            return max;
+        }
+
+        private void CountSort(int[] data, int exponent)
+        {
+            // Base 10 numbers so count array has size 10;
+            int[] count = new int[10];
+            for (int i = 0; i < 10; i++)
+            {
+                count[i] = 0;
+            }
+
+            // Get counts
+            for (int i = 0; i < data.Length; i++)
+            {
+                count[(data[i] / exponent) % 10]++;
+            }
+
+            // Adjust counts
+            for (int i = 1; i < 10; i++)
+            {
+                count[i] = count[i] + count[i - 1];
+            }
+
+            // Build new sorted array base on count data
+            int[] sortedArray = new int[data.Length];
+            for (int i = data.Length - 1; i >= 0; i--)
+            {
+                int index = count[(data[i] / exponent) % 10];
+                sortedArray[index - 1] = data[i];
+                --count[(data[i] / exponent) % 10];
+            }
+
+            // Copy array over data;
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = sortedArray[i];
+            }
+        }
     }
 }
